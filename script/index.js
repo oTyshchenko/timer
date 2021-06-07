@@ -53,9 +53,15 @@ const startStop = () => {
     }
 };
 
+let firstClickTime = 0;
 const wait = () => {
-    startStopBtn.dataset.track = '0'
-	window.clearInterval(window.timerId);
+    const date = new Date();
+    const secondClickTime = date.getTime();
+    if((secondClickTime - firstClickTime) < 300) {
+        startStopBtn.dataset.track = '0';
+        window.clearInterval(window.timerId);
+    }
+    firstClickTime = secondClickTime;
 };
 
 const reset = () => {
